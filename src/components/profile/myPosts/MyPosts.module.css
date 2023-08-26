@@ -1,11 +1,4 @@
 
-
-.content {
-    grid-area: c;
-    background-color: #bda837;
-
-}
-
 .imageTitle {
     height: 300px;
     overflow: hidden;
@@ -17,3 +10,5 @@
     height: auto;
     top: -100%;
 }
+
+
