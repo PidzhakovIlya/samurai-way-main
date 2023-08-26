@@ -1,0 +1,19 @@
+
+
+.content {
+    grid-area: c;
+    background-color: #bda837;
+
+}
+
+.imageTitle {
+    height: 300px;
+    overflow: hidden;
+}
+
+.imageTitle img {
+    position: relative;
+    width: 100%;
+    height: auto;
+    top: -100%;
+}

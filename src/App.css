@@ -7,36 +7,6 @@
   "n c";
 }
 
-.header {
-    grid-area: h;
-    background-color: gold;
-}
 
-.header img {
-    width: 100px;
 
-}
 
-.navigation-app {
-    grid-area: n;
-    background-color: #65591a;
-
-}
-
-.content {
-    grid-area: c;
-    background-color: #bda837;
-
-}
-
-.image-title {
-    height: 300px;
-    overflow: hidden;
-}
-
-.image-title img {
-    position: relative;
-    width: 100%;
-    height: auto;
-    top: -100%;
-}

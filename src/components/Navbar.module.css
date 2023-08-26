@@ -1,0 +1,26 @@
+
+
+.navigation_app {
+    grid-area: n;
+    background-color: #65591a;
+
+}
+
+.item {
+    list-style: none;
+}
+
+.item a {
+    text-decoration: none;
+    color: white;
+}
+
+.active a{
+    color: gold;
+}
+
+.item:hover {
+    transform: translateY(-1px);
+    color: aqua;
+    transition: ease-in-out 0.2s ;
+}
