@@ -1,7 +1,8 @@
-import React from 'react';
-import s from './Profile.module.css'
+import React from "react";
+import s from "./MyPosts.module.css"
+import {Post} from "./post/Post";
 
-export const Profile = () => {
+export const MyPosts = () => {
     return (
         <div className={s.content}>
             <div className={s.imageTitle}>
@@ -11,12 +12,13 @@ export const Profile = () => {
             </div>
             <div>Ava + descroption</div>
             <div>
-                <div>my Post</div>
-                <div>New Post</div>
+                <div>my Posts</div>
                 <div>
-                    <div>post1</div>
-                    <div>post2</div>
+                    <textarea></textarea>
+                    <button>Add Post</button>
                 </div>
+                <Post message = "Hi,how are your?" like={11}/>
+                <Post message = 'it`s my first post' like={22}/>
             </div>
 
         </div>
