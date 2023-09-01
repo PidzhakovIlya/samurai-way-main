@@ -4,7 +4,7 @@ import {MyPosts} from "./myPosts/MyPosts";
 
 export const Profile = () => {
     return (
-        <div className={s.content}>
+        <div>
             <MyPosts/>
         </div>
 
