@@ -1,0 +1,23 @@
+
+.imageTitle {
+    height: 300px;
+    overflow: hidden;
+}
+
+.imageTitle img {
+    position: relative;
+    width: 100%;
+    height: auto;
+    top: -100%;
+}
+
+.profileInfoBlock{
+
+}
+
+.descriptionBlock{
+    padding: 10px;
+}
+
+
+

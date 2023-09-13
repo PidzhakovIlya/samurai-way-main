@@ -1,14 +1,5 @@
 
-.imageTitle {
-    height: 300px;
-    overflow: hidden;
+.postsBlock{
+    padding: 10px;
 }
-
-.imageTitle img {
-    position: relative;
-    width: 100%;
-    height: auto;
-    top: -100%;
-}
-
 
