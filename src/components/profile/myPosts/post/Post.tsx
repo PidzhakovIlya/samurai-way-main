@@ -4,9 +4,10 @@ import s from "./Post.module.css"
 
 type PostPropsType = {
     message: string
-    like: number
+    likeCount: number
+    id:number
 }
-export const Post: React.FC<PostPropsType> = ({message, like}) => {
+export const Post: React.FC<PostPropsType> = ({message, likeCount}) => {
     return (
         <div className={s.item}>
 
@@ -14,7 +15,7 @@ export const Post: React.FC<PostPropsType> = ({message, like}) => {
                  src="https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg" alt=""/>
             {message}
             <div>
-                <span>Like {like}</span>
+                <span>Like {likeCount}</span>
             </div>
         </div>
 
