@@ -1,6 +1,15 @@
 .dialogs {
     display: grid;
     grid-template-columns: 2fr 10fr;
+
+}
+
+.dialog a{
+    color: white;
+    text-decoration: none;
+    &:hover{
+        color: #ad0769;
+    }
 }
 .dialogsItems{
     padding: 10px;
@@ -11,5 +20,7 @@
 
 .messages{
     padding: 10px;
+    color: white;
+
 }
 .message{}
