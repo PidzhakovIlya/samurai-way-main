@@ -15,7 +15,6 @@ type AppPropsType = {
 }
 function App(props:AppPropsType) {
     return (
-        <BrowserRouter>
             <div className="App">
                 <Header/>
                 <Navbar/>
@@ -27,7 +26,6 @@ function App(props:AppPropsType) {
                     <Route path="/settings" render={()=> <Settings/>}/>
                 </div>
             </div>
-        </BrowserRouter>
     );
 }
 
