@@ -7,10 +7,13 @@
 .dialog a{
     color: white;
     text-decoration: none;
-    &:hover{
-        color: #ad0769;
-    }
+
 }
+
+.dialog a:hover{
+    color: #ad0769;
+}
+
 .dialogsItems{
     padding: 10px;
 }
