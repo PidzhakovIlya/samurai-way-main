@@ -1,3 +1,4 @@
+import {rerenderEntireTree} from "../rernder";
 
 export type StateType = {
     profilePage:ProfilePageType,
@@ -59,4 +60,5 @@ export const addPost = (postText:string) =>{
         likeCount: 55
     }
     state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state)
 }
