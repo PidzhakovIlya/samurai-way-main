@@ -7,6 +7,8 @@ import {DialogsPageType} from "../../redux/state";
 
 type DialogsType = {
     state: DialogsPageType
+    addMessage:()=>void
+    newMessageText:(text:string)=>void
 }
 
 export const Dialogs = (props:DialogsType) => {
@@ -17,7 +19,11 @@ export const Dialogs = (props:DialogsType) => {
     let newMessage = React.createRef<HTMLTextAreaElement>()
 
     const sendMessage = () =>{
-        alert(newMessage.current?.value)
+        props.addMessage()
+    }
+
+    const onChangeHandler = () => {
+        if (newMessage.current) props.newMessageText(newMessage.current.value)
     }
     return (
         <div className={s.dialogs}>
@@ -28,7 +34,7 @@ export const Dialogs = (props:DialogsType) => {
                 {messagesElements}
             </div>
             <div>
-                <textarea ref={newMessage}></textarea>
+                <textarea ref={newMessage} onChange={onChangeHandler} value={props.state.newMessageText}></textarea>
                 <button onClick={sendMessage}>Send</button>
             </div>
         </div>
