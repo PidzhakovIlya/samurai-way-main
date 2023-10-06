@@ -1,4 +1,4 @@
-import {rerenderEntireTree} from "../rernder";
+let rerenderEntireTree = ()=>{}
 
 export type StateType = {
     profilePage:ProfilePageType,
@@ -65,13 +65,12 @@ export const addPost = () =>{
     }
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = '';
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 export const updateNewPostText = (newText:string) =>{
     state.profilePage.newPostText = newText;
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
-
 export const addMessage = () =>{
     const newMessage: MessageType = {
         id: new Date().getTime(),
@@ -80,9 +79,12 @@ export const addMessage = () =>{
     }
     state.dialogsPage.messages.push(newMessage)
     state.dialogsPage.newMessageText = '';
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 export const newMessageText = (newText:string) =>{
   state.dialogsPage.newMessageText = newText
-    rerenderEntireTree(state)
+    rerenderEntireTree()
+}
+export const subscribe = (observer: ()=>void) =>{
+    rerenderEntireTree = observer
 }
