@@ -134,6 +134,12 @@ export let store:StoreType = {
 
 }
 
+export const addPostAC = ():AddPostActionType=>({ type: 'ADD-POST'}as const)
+
+export const updateNewPostTextAC = (newText:string):UpdateNewPostTextActionType=>
+    ({ type: 'UPDATE-NEW-POST-TEXT', newText:newText }as const)
+
+
 // export let state: StateType = {
 //     profilePage: {
 //         posts: [

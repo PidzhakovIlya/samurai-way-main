@@ -1,7 +1,14 @@
 import React, {createRef} from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./post/Post";
-import {ActionType, PostType, UpdateNewPostTextActionType} from "../../../redux/state";
+import {
+    ActionType,
+    addPostAC,
+    AddPostActionType,
+    PostType,
+    updateNewPostTextAC,
+    UpdateNewPostTextActionType
+} from "../../../redux/state";
 
 type MyPostsType = {
     posts: PostType[]
@@ -19,15 +26,14 @@ export const MyPosts = (props: MyPostsType) => {
     const addPost = () => {
         if (newPostElement.current) {
 
-            props.dispatch({type: 'ADD-POST'})
+            props.dispatch(addPostAC())
         }
 
     }
 
     const onChangeTextareaHandler = () => {
-        if (newPostElement.current) props.dispatch(
-            {type: 'UPDATE-NEW-POST-TEXT', newText: newPostElement.current.value}
-        )
+        if (newPostElement.current)
+            props.dispatch(updateNewPostTextAC(newPostElement.current.value))
     }
 
     return (
