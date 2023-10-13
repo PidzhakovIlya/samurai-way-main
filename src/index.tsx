@@ -6,11 +6,11 @@ import {BrowserRouter} from "react-router-dom";
 import {store} from "./redux/state";
 // import {addMessage, addPost, newMessageText, state,  subscribe, updateNewPostText} from "./redux/state";
 
-const rerenderEntireTree =() => {
+const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <App store={store}
-
+                 dispatch={store.dispatch.bind(store)}
             />
         </BrowserRouter>,
         document.getElementById('root')

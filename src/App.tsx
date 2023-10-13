@@ -8,14 +8,15 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/news/News";
 import {Music} from "./components/music/Music";
 import {Settings} from "./components/settings/Settings";
-import { StoreType} from "./redux/state";
+import {ActionType, StoreType} from "./redux/state";
 
 type AppPropsType = {
-    store:StoreType
+    store: StoreType
+    dispatch: (action: ActionType) => void
 
 }
 
-const App:React.FC<AppPropsType> = (props) => {
+const App: React.FC<AppPropsType> = (props) => {
     let state = props.store.getState()
     return (
         <div className="App">
@@ -28,8 +29,7 @@ const App:React.FC<AppPropsType> = (props) => {
                 />}/>
                 <Route path="/profile"
                        render={() => <Profile profilePage={state.profilePage}
-                                              addPost={props.store.addPost.bind(props.store)}
-                                              updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+                                              dispatch={props.dispatch}
                        />}
                 />
                 <Route path="/news" render={() => <News/>}/>
