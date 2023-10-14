@@ -1,16 +1,11 @@
 import {ActionType, DialogsPageType} from "./state";
+import {updateNewPostTextAC} from "./profileReducer";
 
-export type UpdateNewMessageTextActionType = {
-    type: "UPDATE-NEW-MESSAGE-TEXT"
-    newText: string
-}
-export type sendMessageActionType = {
-    type: "SEND-MESSAGE"
-}
+export type UpdateNewMessageTextActionType = ReturnType<typeof UpdateNewMessageTextAC>
+export type SendMessageActionType = ReturnType<typeof sendMessageAC>
 
-// type ActionType = UpdateNewMessageTextActionType | sendMessageActionType;
 
-const dialogsReducer = (state: DialogsPageType, action: ActionType) => {
+const dialogsReducer = (state: DialogsPageType, action: ActionType): DialogsPageType=> {
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-TEXT": {
             state.newMessageText = action.newText;
@@ -29,7 +24,7 @@ const dialogsReducer = (state: DialogsPageType, action: ActionType) => {
 
 export default dialogsReducer;
 
-export const UpdateNewMessageTextAC = (newText: string): UpdateNewMessageTextActionType =>
+export const UpdateNewMessageTextAC = (newText: string) =>
     ({type: "UPDATE-NEW-MESSAGE-TEXT", newText: newText} as const)
 
-export const sendMessageAC = (): sendMessageActionType => ({type: "SEND-MESSAGE"} as const)
+export const sendMessageAC = () => ({type: "SEND-MESSAGE"} as const)

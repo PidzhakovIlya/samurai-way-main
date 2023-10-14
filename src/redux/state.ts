@@ -1,5 +1,5 @@
 import profileReducer, {AddPostActionType, UpdateNewPostTextActionType} from "./profileReducer";
-import dialogsReducer, {sendMessageActionType, UpdateNewMessageTextActionType} from "./dialogsReducer";
+import dialogsReducer, {SendMessageActionType, UpdateNewMessageTextActionType} from "./dialogsReducer";
 
 export type RootStateType = {
     profilePage: ProfilePageType,
@@ -31,16 +31,12 @@ export type MessageType = {
 export type ActionType = AddPostActionType
     | UpdateNewPostTextActionType
     | UpdateNewMessageTextActionType
-    | sendMessageActionType;
+    | SendMessageActionType;
 
 export type StoreType = {
     _state: RootStateType
     getState: () => RootStateType,
     _callSubscriber: () => void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    addMessage: () => void
-    newMessageText: (newText: string) => void
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionType) => void
 }
@@ -81,33 +77,33 @@ export let store: StoreType = {
     },
     _callSubscriber() {
     },
-    addPost() {
-        const newPost: PostType = {
-            id: new Date().getTime(),
-            message: this._state.profilePage.newPostText,
-            likeCount: 55
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = "";
-        this._callSubscriber()
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber()
-    },
-    addMessage() {
-        const newMessage: MessageType = {
-            id: new Date().getTime(),
-            message: this._state.dialogsPage.newMessageText,
-        }
-        this._state.dialogsPage.messages.push(newMessage)
-        this._state.dialogsPage.newMessageText = "";
-        this._callSubscriber()
-    },
-    newMessageText(newText: string) {
-        this._state.dialogsPage.newMessageText = newText
-        this._callSubscriber()
-    },
+    // addPost() {
+    //     const newPost: PostType = {
+    //         id: new Date().getTime(),
+    //         message: this._state.profilePage.newPostText,
+    //         likeCount: 55
+    //     }
+    //     this._state.profilePage.posts.push(newPost)
+    //     this._state.profilePage.newPostText = "";
+    //     this._callSubscriber()
+    // },
+    // updateNewPostText(newText: string) {
+    //     this._state.profilePage.newPostText = newText;
+    //     this._callSubscriber()
+    // },
+    // addMessage() {
+    //     const newMessage: MessageType = {
+    //         id: new Date().getTime(),
+    //         message: this._state.dialogsPage.newMessageText,
+    //     }
+    //     this._state.dialogsPage.messages.push(newMessage)
+    //     this._state.dialogsPage.newMessageText = "";
+    //     this._callSubscriber()
+    // },
+    // newMessageText(newText: string) {
+    //     this._state.dialogsPage.newMessageText = newText
+    //     this._callSubscriber()
+    // },
     subscribe(observer) {
         this._callSubscriber = observer
     },

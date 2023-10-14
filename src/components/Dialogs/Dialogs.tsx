@@ -8,8 +8,6 @@ import {sendMessageAC, UpdateNewMessageTextAC} from "../../redux/dialogsReducer"
 
 type DialogsType = {
     state: DialogsPageType
-    addMessage:()=>void
-    newMessageText:(text:string)=>void
     dispatch: (action: ActionType) => void
 }
 
@@ -23,11 +21,9 @@ export const Dialogs = (props:DialogsType) => {
 
     const onSendMessage = () =>{
         props.dispatch(sendMessageAC())
-        // props.addMessage()
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // if (newMessage.current) props.dispatch(UpdateNewMessageTextAC(newMessage.current.value))
         props.dispatch(UpdateNewMessageTextAC(e.currentTarget.value))
     }
     return (

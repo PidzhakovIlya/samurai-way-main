@@ -4,7 +4,7 @@ import {Header} from "./components/header/Header";
 import {Navbar} from "./components/navbar/Navbar";
 import {Profile} from "./components/profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import {News} from "./components/news/News";
 import {Music} from "./components/music/Music";
 import {Settings} from "./components/settings/Settings";
@@ -24,8 +24,6 @@ const App: React.FC<AppPropsType> = (props) => {
             <Navbar/>
             <div className={"content-wrapper"}>
                 <Route path="/dialogs" render={() => <Dialogs state={state.dialogsPage}
-                                                              addMessage={props.store.addMessage.bind(props.store)}
-                                                              newMessageText={props.store.newMessageText.bind(props.store)}
                                                               dispatch={props.dispatch}
                 />}/>
                 <Route path="/profile"

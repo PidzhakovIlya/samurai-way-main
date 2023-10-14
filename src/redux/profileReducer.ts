@@ -1,15 +1,10 @@
 import {ActionType, PostType, ProfilePageType} from "./state";
 
 
-export type AddPostActionType = {
-    type: "ADD-POST"
-}
-export type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
-}
+export type AddPostActionType = ReturnType<typeof addPostAC>
 
-// type ActionType = AddPostActionType | UpdateNewPostTextActionType
+export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
+
 
  const profileReducer = (state: ProfilePageType, action:ActionType):ProfilePageType=>{
     switch (action.type) {
@@ -34,7 +29,7 @@ export type UpdateNewPostTextActionType = {
 
 export default profileReducer;
 
-export const addPostAC = (): AddPostActionType => ({type: "ADD-POST"} as const)
+export const addPostAC = () => ({type: "ADD-POST"} as const)
 
-export const updateNewPostTextAC = (newText: string): UpdateNewPostTextActionType =>
+export const updateNewPostTextAC = (newText: string) =>
     ({type: "UPDATE-NEW-POST-TEXT", newText: newText} as const)
