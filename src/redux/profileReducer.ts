@@ -25,13 +25,10 @@ const profileReducer = (state = initialState, action: ActionType): ProfilePageTy
                 message: state.newPostText,
                 likeCount: 55
             }
-            state.posts.push(newPost)
-            state.newPostText = "";
-            return {...state}
+            return {...state, posts: [newPost, ...state.posts ], newPostText:''}
         }
         case "UPDATE-NEW-POST-TEXT": {
-            state.newPostText = action.newText;
-            return {...state}
+            return {...state, newPostText:action.newText}
 
         }
         default:

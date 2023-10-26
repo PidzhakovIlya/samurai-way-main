@@ -32,9 +32,7 @@ const dialogsReducer = (state=initialState, action: ActionType): DialogsPageType
         }
         case "SEND-MESSAGE": {
             const newMessage = {id: 1, message: state.newMessageText}
-            state.messages.push(newMessage)
-            state.newMessageText = ""
-            return {...state}
+            return {...state, messages : [...state.messages, newMessage ], newMessageText: '' }
         }
         default:
             return state
