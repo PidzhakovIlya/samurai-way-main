@@ -1,18 +1,10 @@
-import React, {createRef} from "react";
+import React from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./post/Post";
-import {ActionType, PostType} from "../../../redux/state";
-import {addPostAC, updateNewPostTextAC} from "../../../redux/profileReducer";
-
-type MyPostsType = {
-    posts: PostType[]
-    newPostText: string
-    addPost: ()=>void
-    updateNewPostText: (text:string)=>void
-}
+import {MyPostPropsType} from "./MyPostsContainer";
 
 
-export const MyPosts = (props: MyPostsType) => {
+export const MyPosts = (props: MyPostPropsType) => {
 
     let postsElements =
         props.posts.map(p => <Post key={p.id} message={p.message} id={p.id} likeCount={p.likeCount}/>)

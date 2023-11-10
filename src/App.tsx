@@ -7,8 +7,8 @@ import {Route} from "react-router-dom";
 import {News} from "./components/news/News";
 import {Music} from "./components/music/Music";
 import {Settings} from "./components/settings/Settings";
-import {ReduxStoreType} from "./redux/reduxStore";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {UsersContainer} from "./components/users/UsersContainer";
 
 
 // type AppPropsType = {
@@ -24,8 +24,8 @@ const App: React.FC= () => {
             <Navbar/>
             <div className={"content-wrapper"}>
                 <Route path="/dialogs" render={() => <DialogsContainer />}/>
-                <Route path="/profile" render={() => <Profile />}
-                />
+                <Route path="/profile" render={() => <Profile />}/>
+                <Route path="/users" render={() => <UsersContainer/>}/>
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>
                 <Route path="/settings" render={() => <Settings/>}/>
