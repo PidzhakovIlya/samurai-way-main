@@ -1,15 +1,30 @@
 
 
 export type UsersReducerType = {
-    users: Array<UserType>
+    users: Array<ResponseUserItemsType>
 }
-export type UserType = {
-    photoUrl:string
-    id: number
-    followed: boolean
-    fullName: string
-    status: string,
-    location: LocationType
+// export type UserType = {
+//     photoUrl:string
+//     id: number
+//     followed: boolean
+//     fullName: string
+//     status: string,
+//     location: LocationType
+// }
+
+export type ResponseUsers= {
+    error:string | null
+    items:Array<ResponseUserItemsType>
+    totalCount:number
+}
+
+export type ResponseUserItemsType = {
+    followed :boolean
+    id:number
+    name:string
+    photos:{small: string, large: string }
+    status:string | null
+    uniqueUrlName: string | null
 }
 
 type LocationType = {
@@ -65,7 +80,7 @@ export const unFollowAC = (userId:number) => {
 }
 
 
-export const setUsersAC = (users:UserType[]) => {
+export const setUsersAC = (users:ResponseUserItemsType[]) => {
     return {
         type: "SET_USERS",
         payload: {

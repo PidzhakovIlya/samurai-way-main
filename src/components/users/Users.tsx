@@ -1,41 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from "./users.module.css"
 import {UsersPropsType} from "./UsersContainer";
+import axios from "axios";
+import {ResponseUsers} from "../../redux/usersReducer";
+import userPhoto from '../../assets/img.png'
+
 
 export const Users = (props: UsersPropsType) => {
-    if (props.users.length === 0) {
-        props.setUsers([{
-            id: 1,
-            photoUrl: 'https://static.vecteezy.com/system/resources/thumbnails/025/284/015/small/close-up-growing-beautiful-forest-in-glass-ball-and-flying-butterflies-in-nature-outdoors-spring-season-concept-generative-ai-photo.jpg',
-            followed: false,
-            fullName: 'Ilya',
-            status: 'I`m learn to react',
-            location: {city: "Saints-Petersburg", country: "Russia"}
-        },
-            {
-                id: 2,
-                photoUrl: 'https://static.vecteezy.com/system/resources/thumbnails/025/284/015/small/close-up-growing-beautiful-forest-in-glass-ball-and-flying-butterflies-in-nature-outdoors-spring-season-concept-generative-ai-photo.jpg',
-                followed: false,
-                fullName: 'Oleg',
-                status: 'I`m speedy',
-                location: {city: "Saints-Petersburg", country: "Russia"}
-            },
-            {
-                id: 3,
-                photoUrl: 'https://static.vecteezy.com/system/resources/thumbnails/025/284/015/small/close-up-growing-beautiful-forest-in-glass-ball-and-flying-butterflies-in-nature-outdoors-spring-season-concept-generative-ai-photo.jpg',
-                followed: false,
-                fullName: 'Egor',
-                status: 'I`m mechanic',
-                location: {city: "Satka", country: "Russia"}
-            }])
-    }
+        useEffect(() => {
+            axios.get<ResponseUsers>("https://social-network.samuraijs.com/api/1.0/users")
+
+                .then(res => props.setUsers(res.data.items))
+        }, [])
 
     return (
         <div>
             {props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
-                      <img className={s.photo} src={u.photoUrl} alt=""/>
+                      <img className={s.photo} src={u.photos.small!==null? u.photos.small: userPhoto } alt=""/>
                     </div>
                     <div>
                         {u.followed ?
@@ -49,12 +32,12 @@ export const Users = (props: UsersPropsType) => {
                 </span>
                 <span>
                     <span>
-                        <div>{u.fullName}</div>
+                        <div>{u.name}</div>
                         <div>{u.status}</div>
                     </span>
                     <span>
-                        <div>{u.location.city}</div>
-                        <div>{u.location.country}</div>
+                        <div>{"u.location.city"}</div>
+                        <div>{"u.location.country"}</div>
                     </span>
                 </span>
             </div>)}
