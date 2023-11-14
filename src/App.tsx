@@ -9,6 +9,7 @@ import {Music} from "./components/music/Music";
 import {Settings} from "./components/settings/Settings";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/users/UsersContainer";
+import Users from "./components/users/Users";
 
 
 // type AppPropsType = {

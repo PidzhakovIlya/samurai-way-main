@@ -1,9 +1,9 @@
 import React from 'react';
-import {Users} from "./Users";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
 import {followAC, ResponseUserItemsType, setUsersAC, unFollowAC} from "../../redux/usersReducer";
 import {Dispatch} from "redux";
+import Users from "./Users";
 
 type MapStateToPropsType = {
     users:ResponseUserItemsType[]
