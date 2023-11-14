@@ -3,14 +3,6 @@
 export type UsersReducerType = {
     users: Array<ResponseUserItemsType>
 }
-// export type UserType = {
-//     photoUrl:string
-//     id: number
-//     followed: boolean
-//     fullName: string
-//     status: string,
-//     location: LocationType
-// }
 
 export type ResponseUsers= {
     error:string | null
@@ -22,15 +14,11 @@ export type ResponseUserItemsType = {
     followed :boolean
     id:number
     name:string
-    photos:{small: string, large: string }
+    photos:{small: string, large: string}
     status:string | null
     uniqueUrlName: string | null
 }
 
-type LocationType = {
-    city: string
-    country: string
-}
 const initialState: UsersReducerType = {
     users: [
 

@@ -7,14 +7,16 @@ import userPhoto from '../../assets/img.png'
 
 
 export const Users = (props: UsersPropsType) => {
-        useEffect(() => {
-            axios.get<ResponseUsers>("https://social-network.samuraijs.com/api/1.0/users")
 
-                .then(res => props.setUsers(res.data.items))
-        }, [])
+    const getUsers = ()=>{
+        if(props.users.length === 0 )
+        axios.get<ResponseUsers>("https://social-network.samuraijs.com/api/1.0/users")
+            .then(res => props.setUsers(res.data.items))
+    }
 
     return (
         <div>
+            <button onClick={getUsers}>Get Users</button>
             {props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
