@@ -2,6 +2,9 @@
 
 export type UsersReducerType = {
     users: Array<ResponseUserItemsType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage:number
 }
 
 export type ResponseUsers= {
@@ -21,11 +24,13 @@ export type ResponseUserItemsType = {
 
 const initialState: UsersReducerType = {
     users: [
-
-    ]
+    ],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
-export type ActionType = followACType | unFollowACType | usersACType
+export type ActionType = followACType | unFollowACType | usersACType | setCurrentPageType | setTotalUsersCountType
 
 
 const usersReducer = (state:UsersReducerType = initialState, action: ActionType): UsersReducerType => {
@@ -38,7 +43,13 @@ const usersReducer = (state:UsersReducerType = initialState, action: ActionType)
 
         }
         case "SET_USERS":{
-            return {...state, users:[...state.users, ...action.payload.users]}
+            return {...state, users:action.payload.users}
+        }
+        case "SET_CURRENT_PAGE":{
+            return {...state, currentPage:action.payload.currentPage}
+        }
+        case "SET_TOTAL_USERS":{
+            return {...state, totalUsersCount:action.payload.totalPages}
         }
         default:
             return state
@@ -48,6 +59,8 @@ const usersReducer = (state:UsersReducerType = initialState, action: ActionType)
 type followACType = ReturnType<typeof followAC>
 type unFollowACType = ReturnType<typeof unFollowAC>
 type usersACType = ReturnType<typeof setUsersAC>
+type setCurrentPageType = ReturnType<typeof setCurrentPageAC>
+type setTotalUsersCountType = ReturnType<typeof setTotalUsersCountAC>
 
 export const followAC = (userId:number) => {
     return {
@@ -75,6 +88,22 @@ export const setUsersAC = (users:ResponseUserItemsType[]) => {
            users
         }
     } as const
+}
+export const setCurrentPageAC = (currentPage:number) => {
+    return {
+        type: "SET_CURRENT_PAGE",
+        payload: {
+            currentPage
+        }
+    } as const
+}
+export const setTotalUsersCountAC = (totalPages:number) =>{
+    return {
+        type: "SET_TOTAL_USERS",
+        payload:{
+            totalPages
+        }
+    }as const
 }
 
 export default usersReducer;
