@@ -3,7 +3,7 @@ import userPhoto from "../../assets/img.png";
 import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 
-type UsersType = Omit<UsersPropsType, 'setTotalUsersCount'| 'setUsers'| 'setCurrentPage'> & {
+type UsersType = Omit<UsersPropsType, 'setTotalUsersCount'| 'setUsers'| 'setCurrentPage'| 'isFetching'| 'toggleIsFetching'> & {
     onPageChanged: (pageNumber: number) => void
 }
 
