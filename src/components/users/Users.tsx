@@ -2,8 +2,11 @@ import s from "./users.module.css";
 import userPhoto from "../../assets/img.png";
 import React from "react";
 import {UsersPropsType} from "./UsersContainer";
+import {NavLink} from "react-router-dom";
 
-type UsersType = Omit<UsersPropsType, 'setTotalUsersCount'| 'setUsers'| 'setCurrentPage'| 'isFetching'| 'toggleIsFetching'> & {
+type UsersType =
+    Omit<UsersPropsType, "setTotalUsersCount" | "setUsers" | "setCurrentPage" | "isFetching" | "toggleIsFetching">
+    & {
     onPageChanged: (pageNumber: number) => void
 }
 
@@ -19,13 +22,15 @@ export const Users: React.FC<UsersType> = (props) => {
         <div>
             <div>
                 {pages.map(p => <span onClick={(e) => props.onPageChanged(p)}
-                                      className={props.currentPage === p ? s.selectedPage : ''}> {p}</span>)}
+                                      className={props.currentPage === p ? s.selectedPage : ""}> {p}</span>)}
 
             </div>
             {props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
+                        <NavLink to={"/profile/"+u.id}>
                       <img className={s.photo} src={u.photos.small !== null ? u.photos.small : userPhoto} alt=""/>
+                        </NavLink>
                     </div>
                     <div>
                         {u.followed ?

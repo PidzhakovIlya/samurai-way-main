@@ -10,9 +10,9 @@ type MapDispatchPropsType = {
     updateNewPostText:(text:string)=>void
     addPost:()=>void
 }
-export type MyPostPropsType = ProfilePageType & MapDispatchPropsType
+export type MyPostPropsType = Omit<ProfilePageType, 'profile'> & MapDispatchPropsType
 
-let mapStateToProps = (state:AppStateType):ProfilePageType =>{
+let mapStateToProps = (state:AppStateType):Omit<ProfilePageType, 'profile'> =>{
     return {
         posts:state.profilePage.posts,
         newPostText: state.profilePage.newPostText

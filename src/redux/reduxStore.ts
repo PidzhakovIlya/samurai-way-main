@@ -14,5 +14,7 @@ const RootReducer = combineReducers({
 
 export const store = createStore(RootReducer)
 
-// export type ReduxStoreType = typeof store
+// // TS-IGNORE
+// window.store= store
+export type ReduxStoreType = typeof store
 
