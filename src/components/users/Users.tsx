@@ -3,7 +3,7 @@ import userPhoto from "../../assets/img.png";
 import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {usersApi} from "../../api/api";
 
 type UsersType =
     Omit<UsersPropsType, "setTotalUsersCount" | "setUsers" | "setCurrentPage" | "isFetching" | "toggleIsFetching">
@@ -11,11 +11,6 @@ type UsersType =
     onPageChanged: (pageNumber: number) => void
 }
 
-type ResponseFollowType = {
-    resultCode: number
-    messages: ['Something wrong'],
-    data: {}
-}
 
 export const Users: React.FC<UsersType> = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -43,11 +38,7 @@ export const Users: React.FC<UsersType> = (props) => {
                     <div>
                         {u.followed ?
                             <button onClick={() => {
-                                axios.delete<ResponseFollowType>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                    withCredentials: true,
-                                    headers: {'API-KEY': "23d212d6-5705-4d11-bb70-b9858302554f"}
-                                })
-
+                                usersApi.follow(u.id)
                                     .then(res => {
                                         if (res.data.resultCode === 0) {
                                             props.unFollow(u.id)
@@ -56,10 +47,7 @@ export const Users: React.FC<UsersType> = (props) => {
 
                             }}>Unfollow</button>
                             : <button onClick={() => {
-                                axios.post<ResponseFollowType>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {userId: u.id}, {
-                                    withCredentials: true,
-                                    headers: {'API-KEY': "23d212d6-5705-4d11-bb70-b9858302554f"}
-                                })
+                                usersApi.follow(u.id)
                                     .then(res => {
                                         if (res.data.resultCode === 0) {
                                             props.follow(u.id)
