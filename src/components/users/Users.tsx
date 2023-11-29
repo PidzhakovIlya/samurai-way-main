@@ -38,22 +38,24 @@ export const Users: React.FC<UsersType> = (props) => {
                     <div>
                         {u.followed ?
                             <button onClick={() => {
-                                usersApi.follow(u.id)
+                                props.toggleIsFollowing(u.id, true)
+                                usersApi.unFollow(u.id)
                                     .then(res => {
                                         if (res.data.resultCode === 0) {
                                             props.unFollow(u.id)
                                         }
-                                    })
+                                    }).finally(() => props.toggleIsFollowing(u.id, false))
 
-                            }}>Unfollow</button>
+                            }} disabled={props.isFollowing.some(id => id === u.id)}>Unfollow</button>
                             : <button onClick={() => {
+                                props.toggleIsFollowing(u.id, true)
                                 usersApi.follow(u.id)
                                     .then(res => {
                                         if (res.data.resultCode === 0) {
                                             props.follow(u.id)
                                         }
-                                    })
-                            }}>follow</button>}
+                                    }).finally(() => props.toggleIsFollowing(u.id, false))
+                            }} disabled={props.isFollowing.some(id => id === u.id)}>follow</button>}
                     </div>
                 </span>
                 <span>
