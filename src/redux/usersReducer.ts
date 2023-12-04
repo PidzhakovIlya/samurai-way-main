@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersApi} from "../api/api";
+
 export type UsersReducerType = {
     users: Array<ResponseUserItemsType>
     pageSize: number
@@ -28,7 +31,7 @@ const initialState: UsersReducerType = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress:  [0]
+    followingInProgress: [0]
 }
 
 export type ActionType =
@@ -129,6 +132,35 @@ export const toggleIsFollowing = (userId: number, isFetching: boolean) => {
             userId
         }
     } as const
+}
+
+export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFetching(true))
+    usersApi.getUsers(currentPage, pageSize)
+        .then(data => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(data.items))
+            dispatch(setTotalUsersCount(data.totalCount))
+        })
+}
+
+export const unFollowTC = (id: number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFollowing(id, true))
+    usersApi.unFollow(id)
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(unFollow(id))
+            }
+        }).finally(() => dispatch(toggleIsFollowing(id, false)))
+}
+export const followTC = (id: number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFollowing(id, true))
+    usersApi.follow(id)
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(follow(id))
+            }
+        }).finally(() => dispatch(toggleIsFollowing(id, false)))
 }
 
 export default usersReducer;

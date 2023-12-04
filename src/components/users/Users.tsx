@@ -3,10 +3,13 @@ import userPhoto from "../../assets/img.png";
 import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 import {NavLink} from "react-router-dom";
-import {usersApi} from "../../api/api";
 
 type UsersType =
-    Omit<UsersPropsType, "setTotalUsersCount" | "setUsers" | "setCurrentPage" | "isFetching" | "toggleIsFetching">
+    Omit<UsersPropsType,
+        | "isFetching"
+        | "toggleIsFetching"
+        | "getUsers"
+    >
     & {
     onPageChanged: (pageNumber: number) => void
 }
@@ -37,25 +40,11 @@ export const Users: React.FC<UsersType> = (props) => {
                     </div>
                     <div>
                         {u.followed ?
-                            <button onClick={() => {
-                                props.toggleIsFollowing(u.id, true)
-                                usersApi.unFollow(u.id)
-                                    .then(res => {
-                                        if (res.data.resultCode === 0) {
-                                            props.unFollow(u.id)
-                                        }
-                                    }).finally(() => props.toggleIsFollowing(u.id, false))
-
-                            }} disabled={props.isFollowing.some(id => id === u.id)}>Unfollow</button>
-                            : <button onClick={() => {
-                                props.toggleIsFollowing(u.id, true)
-                                usersApi.follow(u.id)
-                                    .then(res => {
-                                        if (res.data.resultCode === 0) {
-                                            props.follow(u.id)
-                                        }
-                                    }).finally(() => props.toggleIsFollowing(u.id, false))
-                            }} disabled={props.isFollowing.some(id => id === u.id)}>follow</button>}
+                            <button onClick={() =>
+                                props.unFollowTC(u.id)}
+                                    disabled={props.isFollowing.some(id => id === u.id)}>Unfollow</button>
+                            : <button onClick={() => props.followTC(u.id)
+                            } disabled={props.isFollowing.some(id => id === u.id)}>follow</button>}
                     </div>
                 </span>
                 <span>
