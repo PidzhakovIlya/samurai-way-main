@@ -1,3 +1,6 @@
+import axios from "axios";
+import {Dispatch} from "redux";
+
 export type ResponseAuthType = {
     resultCode: number
     messages: []
@@ -44,4 +47,12 @@ export const setAuthUserData = (data: ResponseDataType) => {
         type: 'SET_USER_DATA',
         data
     } as const
+}
+
+export const setAuth = () =>(dispatch:Dispatch)=>{
+    axios.get<ResponseAuthType>('https://social-network.samuraijs.com/api/1.0/auth/me',{withCredentials:true})
+        .then(res => {
+            if(res.data.resultCode===0)
+                dispatch(setAuthUserData(res.data.data))
+        })
 }

@@ -1,3 +1,5 @@
+import {Dispatch} from "redux";
+import axios from "axios";
 
 
 export type PostType = {
@@ -83,3 +85,10 @@ export const updateNewPostTextAC = (newText: string) =>
 
 export const setUserProfile = (profile: ResponseUserType) =>
     ({type: "SET_USER_PROFILE", profile} as const)
+
+export const setUserProfileTC = (userId:string) =>(dispatch: Dispatch)=>{
+    axios.get<ResponseUserType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+        .then(res => {
+            dispatch(setUserProfile(res.data))
+        })
+}
