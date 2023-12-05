@@ -11,8 +11,8 @@ export const Header = (props:HeaderContainerPropsType) => {
                      alt=""/>
             </div>
             <div className={s.loginBlock}>
-                <NavLink className={s.linkLogin} to={'/login'}>Login</NavLink>
-                {/*{props.isAuth?<span>{props.login}</span>:<span>Залогинься</span>}*/}
+
+                {props.isAuth?<span>{props.login}</span>:<NavLink className={s.linkLogin} to={'/login'}>Login</NavLink>}
             </div>
         </header>
     );
