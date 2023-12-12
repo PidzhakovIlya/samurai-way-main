@@ -10,13 +10,14 @@ type MapDispatchPropsType = {
     onChangeTextarea: (text: string) => void
     sendMessage: () => void
 }
-export type DialogsPropsType = MapDispatchPropsType & InitialStateType
+export type DialogsPropsType = MapDispatchPropsType & InitialStateType & {isAuth:boolean}
 
-let mapStateToProps = (state: AppStateType): InitialStateType => {
+let mapStateToProps = (state: AppStateType): InitialStateType & {isAuth:boolean} => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessageText: state.dialogsPage.newMessageText
+        newMessageText: state.dialogsPage.newMessageText,
+        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
