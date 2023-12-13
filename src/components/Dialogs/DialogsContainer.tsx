@@ -4,6 +4,7 @@ import {Dialogs} from "./Dialogs";
 import {AppStateType} from "../../redux/reduxStore";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import {AuthRedirectComponent} from "../../hoc/WithAuthRedirect";
 
 
 type MapDispatchPropsType = {
@@ -20,6 +21,8 @@ let mapStateToProps = (state: AppStateType): InitialStateType & {isAuth:boolean}
         isAuth: state.auth.isAuth
     }
 }
+
+
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         onChangeTextarea: (text: string) => {
@@ -31,5 +34,4 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     }
 }
 
-
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+export const DialogsContainer = AuthRedirectComponent(connect(mapStateToProps, mapDispatchToProps)(Dialogs))
