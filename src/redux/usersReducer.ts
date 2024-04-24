@@ -139,8 +139,8 @@ export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Di
     usersApi.getUsers(currentPage, pageSize)
         .then(data => {
             dispatch(toggleIsFetching(false))
-            dispatch(setUsers(data.items))
-            dispatch(setTotalUsersCount(data.totalCount))
+            dispatch(setUsers(data.data.items))
+            dispatch(setTotalUsersCount(data.data.totalCount))
         })
 }
 

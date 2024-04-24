@@ -20,14 +20,14 @@ export type AuthStateType = ResponseDataType & {
     isAuth: boolean
 }
 
-const initialState: AuthStateType = {
-        id: 2,
-        email: 'blabla@bla.bla',
-        login: 'samurai',
-        isAuth: false
-}
+const initialState = {
+        // id: 2,
+        // email: 'blabla@bla.bla',
+        // login: 'samurai',
+        // isAuth: false
+} as AuthStateType
 
-export const authReducer = (state = initialState, action: ActionType): AuthStateType => {
+export const authReducer = (state:AuthStateType = initialState, action: ActionType): AuthStateType => {
     switch (action.type) {
         case 'SET_USER_DATA':
             return {
@@ -52,7 +52,6 @@ export const setAuthUserData = (data: ResponseDataType) => {
 export const getAuthUserData = () =>(dispatch:Dispatch)=>{
     authApi.me()
         .then(res => {
-            console.log(res)
             if(res.data.resultCode===0)
                 dispatch(setAuthUserData(res.data.data))
         })

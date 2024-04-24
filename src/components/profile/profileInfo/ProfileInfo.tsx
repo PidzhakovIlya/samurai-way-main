@@ -5,9 +5,8 @@ import {Preloader} from "../../common/Preloader";
 import {ProfileStatus} from "./ProfileStatus";
 
 
-
-export const ProfileInfo = (props:ProfileType) => {
-    if(!props.profile){
+export const ProfileInfo = (props: ProfileType) => {
+    if (!props.profile) {
         return <Preloader/>
     }
 
@@ -20,7 +19,7 @@ export const ProfileInfo = (props:ProfileType) => {
             {/*</div>*/}
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.small} alt=""/>
-                <ProfileStatus status={'Hello'}/>
+                <ProfileStatus status={props.status} updateStatus = {props.updateStatus} />
             </div>
         </div>
 

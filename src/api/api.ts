@@ -1,11 +1,11 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 import {ResponseUsers} from "../redux/usersReducer";
 import {ResponseAuthType} from "../redux/authReducer";
-import {ResponseUserType} from "../redux/profileReducer";
+import {ResponseStatusType, ResponseUserType} from "../redux/profileReducer";
 
 type ResponseFollowType = {
     resultCode: number
-    messages: ['Something wrong'],
+    messages: ["Something wrong"],
     data: {}
 }
 
@@ -20,7 +20,7 @@ const instance = axios.create({
 export const usersApi = {
     getUsers(currentPage: number = 1, pageSize: number = 10) {
         return instance.get<ResponseUsers>(`users?page=${currentPage}&count=${pageSize}`)
-            .then(res => res.data)
+            // .then(res => res.data)
     },
     follow(id: number) {
         return instance.post<ResponseFollowType>(`follow/${id}`, {userId: id})
@@ -28,13 +28,23 @@ export const usersApi = {
     unFollow(id: number) {
         return instance.delete<ResponseFollowType>(`follow/${id}`)
     },
-    getProfile(userId:string){
-        return  instance.get<ResponseUserType>(`profile/${userId}`)
+
+}
+
+export const profileApi = {
+    getProfile(userId: string) {
+        return instance.get<ResponseUserType>(`profile/${userId}`)
+    },
+    getStatus(userId: string) {
+        return instance.get(`profile/status/${userId}`)
+    } ,
+    updateStatus(status:string) {
+        return instance.put<AxiosResponse, AxiosResponse<ResponseStatusType>,{status:string}>(`profile/status`,{status})
     }
 }
 export const authApi = {
-    me(){
-       return  instance.get<ResponseAuthType>('auth/me',)
+    me() {
+        return instance.get<ResponseAuthType>("auth/me",)
     },
 
 }

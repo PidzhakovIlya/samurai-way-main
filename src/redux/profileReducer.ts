@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import axios from "axios";
-import {usersApi} from "../api/api";
+import {profileApi, usersApi} from "../api/api";
 
 
 export type PostType = {
@@ -12,12 +12,13 @@ export type ProfilePageType = {
     posts: PostType[]
     newPostText: string
     profile: null | ResponseUserType
+    status: string
 }
 
 export type ResponseUserType = {
     "aboutMe": string,
     "contacts": {
-        "facebook": string| undefined,
+        "facebook": string | undefined,
         "website": string | undefined,
         "vk": string | undefined,
         "twitter": string | undefined,
@@ -36,11 +37,23 @@ export type ResponseUserType = {
     }
 }
 
-export type ActionType = AddPostActionType | UpdateNewPostTextActionType | setUserProfileActionType
+export type ResponseStatusType<T = {}> = {
+    resultCode: number
+    messages: string
+    data: T
+
+}
+
+
+export type ActionType = AddPostActionType
+    | UpdateNewPostTextActionType
+    | setUserProfileActionType
+    | setStatusActionType
 
 export type AddPostActionType = ReturnType<typeof addPostAC>
 export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
 export type setUserProfileActionType = ReturnType<typeof setUserProfile>
+export type setStatusActionType = ReturnType<typeof setStatus>
 
 
 const initialState: ProfilePageType = {
@@ -52,13 +65,14 @@ const initialState: ProfilePageType = {
         {id: 5, message: "Dimych", likeCount: 55}
     ],
     newPostText: "Haaa",
-    profile: null
+    profile: null,
+    status: "Hello"
 }
 
-const profileReducer = (state:ProfilePageType = initialState, action: ActionType): ProfilePageType => {
+const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
     switch (action.type) {
-        case "SET_USER_PROFILE":{
-            return {...state, profile:action.profile }
+        case "SET_USER_PROFILE": {
+            return {...state, profile: action.profile}
         }
         case "ADD-POST": {
             const newPost: PostType = {
@@ -66,11 +80,14 @@ const profileReducer = (state:ProfilePageType = initialState, action: ActionType
                 message: state.newPostText,
                 likeCount: 55
             }
-            return {...state, posts: [newPost, ...state.posts ], newPostText:''}
+            return {...state, posts: [newPost, ...state.posts], newPostText: ""}
         }
         case "UPDATE-NEW-POST-TEXT": {
-            return {...state, newPostText:action.newText}
+            return {...state, newPostText: action.newText}
 
+        }
+        case "SET_STATUS": {
+            return {...state, status: action.status}
         }
         default:
             return state
@@ -87,9 +104,23 @@ export const updateNewPostTextAC = (newText: string) =>
 export const setUserProfile = (profile: ResponseUserType) =>
     ({type: "SET_USER_PROFILE", profile} as const)
 
-export const getUserProfile = (userId:string) =>(dispatch: Dispatch)=>{
-    usersApi.getProfile(userId)
+export const setStatus = (status: string) =>
+    ({type: "SET_STATUS", status} as const)
+
+export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
+    profileApi.getProfile(userId)
         .then(res => {
             dispatch(setUserProfile(res.data))
         })
+}
+
+export const getStatus = (userId: string) => async (dispatch: Dispatch) => {
+    const res = await profileApi.getStatus(userId)
+    console.warn(res)
+    dispatch(setStatus(res.data))
+}
+export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+    const res = await profileApi.updateStatus(status)
+    if (res.data.resultCode === 0)
+        dispatch(setStatus(status))
 }
